@@ -1,9 +1,16 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI';
+import Bookshelf from './Bookshelf';
 import './App.css'
 
 class BooksApp extends React.Component {
   state = {
+    books: [],
+    bookshelves: [
+      { id: 'currentlyReading', name: 'Currently Reading' },
+      { id: 'wantToRead', name: 'Want To Read' },
+      { id: 'read', name: 'Read' },
+    ],
     /**
      * TODO: Instead of using this state variable to keep track of which page
      * we're on, use the URL in the browser's address bar. This will ensure that
@@ -11,6 +18,15 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false
+  };
+
+  componentDidMount() {
+    BooksAPI.getAll()
+      .then(books => {
+        this.setState({
+          books: books
+        });
+      });
   }
 
   render() {
@@ -38,10 +54,24 @@ class BooksApp extends React.Component {
             </div>
           </div>
         ) : (
+
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
+
+            <h1>Hello</h1>
+
+            {this.state.bookshelves.map(bookshelf => {
+              const bookshelfBooks = this.state.books.filter(book => book.shelf === bookshelf.id);
+              return (
+                <Bookshelf name={bookshelf.name} books={bookshelfBooks} key={bookshelf.id} />
+              );
+
+              // TODO: Add a paragraph pf text when the shelf has no books
+
+            })}
+
             <div className="list-books-content">
               <div>
                 <div className="bookshelf">
