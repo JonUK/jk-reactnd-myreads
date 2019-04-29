@@ -7,6 +7,7 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
+    loading: true,
     books: [],
     bookshelves: [
       { value: 'currentlyReading', name: 'Currently Reading' },
@@ -50,6 +51,7 @@ class BooksApp extends React.Component {
     const books = await BooksAPI.getAll();
 
     this.setState({
+      loading: false,
       books: books
     });
   }
@@ -58,9 +60,16 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Header />
-        {this.state.showSearchPage ? (
+
+        {this.state.showSearchPage && (
           <SearchPage showSearchPage={this.showSearchPage} />
-        ) : (
+        )}
+
+        {!this.state.showSearchPage && this.state.loading && (
+          <div className="loader" aria-label="Loading" />
+        )}
+
+        {!this.state.showSearchPage && !this.state.loading && (
           <ListBooksPage
             books={this.state.books}
             bookshelves={this.state.bookshelves}
@@ -68,6 +77,7 @@ class BooksApp extends React.Component {
             showSearchPage={this.showSearchPage}
           />
         )}
+
       </div>
     )
   }

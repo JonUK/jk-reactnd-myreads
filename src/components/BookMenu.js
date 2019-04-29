@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class BookMenu extends Component {
-  static propType = {
+  static propTypes = {
     book: PropTypes.object.isRequired,
     moveBook: PropTypes.func.isRequired
   };
