@@ -4,19 +4,27 @@ import Book from './Book';
 
 function Bookshelf(props) {
 
-  return (
-    <div>
-      <h1>Bookshelf - {props.name}</h1>
-      {props.books.map(book => (
-        <Book book={book} key={book.id} />
-      ))}
-    </div>
+  // TODO: Add a paragraph of text when the shelf has no books
 
+  return (
+    <div className="bookshelf">
+      <h2 className="bookshelf-title">{props.name}</h2>
+      <div className="bookshelf-books">
+        <ol className="books-grid">
+          {props.books.map(book => (
+            <li key={book.id}>
+              <Book book={book} moveBook={props.moveBook} />
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
   );
 }
 
 Bookshelf.propTypes = {
-  books: PropTypes.array
+  books: PropTypes.array.isRequired,
+  moveBook: PropTypes.func.isRequired
 };
 
 export default Bookshelf;
