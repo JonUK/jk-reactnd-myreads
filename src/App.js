@@ -21,7 +21,7 @@ class BooksApp extends React.Component {
     showSearchPage: false
   };
 
-  moveBook = (bookId, shelf) => {
+  moveBook = async (bookId, shelf) => {
     const originalBook = this.state.books.find(book => book.id === bookId);
 
     // Take a deep copy of the book so we don't mutate the original
@@ -34,16 +34,17 @@ class BooksApp extends React.Component {
 
     this.setState({
       books: updatedBooks
-    })
+    });
+
+    await BooksAPI.update(newBook, shelf);
   };
 
-  componentDidMount() {
-    BooksAPI.getAll()
-      .then(books => {
-        this.setState({
-          books: books
-        });
-      });
+  async componentDidMount() {
+    const books = await BooksAPI.getAll();
+
+    this.setState({
+      books: books
+    });
   }
 
   render() {
