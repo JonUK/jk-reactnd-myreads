@@ -59,24 +59,27 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
+
         <Header />
 
-        {this.state.showSearchPage && (
-          <SearchPage showSearchPage={this.showSearchPage} />
-        )}
+        <main>
+          {this.state.showSearchPage && (
+            <SearchPage showSearchPage={this.showSearchPage} />
+          )}
 
-        {!this.state.showSearchPage && this.state.loading && (
-          <div className="loader" aria-label="Loading" />
-        )}
+          {!this.state.showSearchPage && this.state.loading && (
+            <div className="loader" aria-label="Loading" />
+          )}
 
-        {!this.state.showSearchPage && !this.state.loading && (
-          <ListBooksPage
-            books={this.state.books}
-            bookshelves={this.state.bookshelves}
-            moveBook={this.moveBook}
-            showSearchPage={this.showSearchPage}
-          />
-        )}
+          {!this.state.showSearchPage && !this.state.loading && (
+            <ListBooksPage
+              books={this.state.books}
+              bookshelves={this.state.bookshelves}
+              moveBook={this.moveBook}
+              showSearchPage={this.showSearchPage}
+            />
+          )}
+        </main>
 
       </div>
     )

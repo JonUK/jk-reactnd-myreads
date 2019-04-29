@@ -7,7 +7,7 @@ function Bookshelf(props) {
   // TODO: Add a paragraph of text when the shelf has no books
 
   return (
-    <div className="bookshelf">
+    <section className="bookshelf">
       <h2 className="bookshelf-title">{props.name}</h2>
       <div className="bookshelf-books">
         <ol className="books-grid">
@@ -18,7 +18,7 @@ function Bookshelf(props) {
           ))}
         </ol>
       </div>
-    </div>
+    </section>
   );
 }
 

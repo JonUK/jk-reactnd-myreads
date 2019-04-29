@@ -8,10 +8,14 @@ function Book(props) {
   return (
     <div className="book">
       <div className="book-top">
-        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${imageUrl}")` }}></div>
+        <div
+          className="book-cover"
+          style={{ width: 128, height: 193, backgroundImage: `url("${imageUrl}")` }}
+          aria-hidden="true">
+        </div>
         <BookMenu book={props.book} moveBook={props.moveBook} />
       </div>
-      <div className="book-title">{props.book.title}</div>
+      <h3 className="book-title">{props.book.title}</h3>
       <div className="book-authors">
         {
           props.book.authors.join(', ') // TODO: Review making this and unordered list

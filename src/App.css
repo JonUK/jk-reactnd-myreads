@@ -71,7 +71,6 @@ body, .app {
   background-size: 28px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   font-size: 0;
-  outline: 0;
 }
 
 .open-search button:hover {
@@ -98,7 +97,6 @@ body, .app {
   padding: 15px 10px;
   font-size: 1.25em;
   border: none;
-  outline: none;
 }
 
 .close-search {
@@ -113,12 +111,10 @@ body, .app {
   background-size: 28px;
   font-size: 0;
   border: none;
-  outline: none;
 }
 
 button:active {
   border: red;
-  outline: none;
 }
 
 .search-books-results {
@@ -152,6 +148,7 @@ button:active {
 
 .book-title {
   margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .book-authors {
