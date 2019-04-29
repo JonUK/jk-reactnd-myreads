@@ -2,6 +2,7 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI';
 import Bookshelf from './Bookshelf';
 import './App.css'
+import logo from './logo/logo.svg';
 
 class BooksApp extends React.Component {
   state = {
@@ -73,7 +74,10 @@ class BooksApp extends React.Component {
 
           <div className="list-books">
             <div className="list-books-title">
-              <h1>MyReads</h1>
+              <h1>
+                <img src={logo} width="60" height="57" alt="" className="list-books-logo"/>
+                MyReads
+              </h1>
             </div>
 
             <div className="list-books-content">

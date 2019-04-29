@@ -16,6 +16,12 @@ body, .app {
   padding: 10px 0;
   background: #2e7c31;
   text-align: center;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+}
+
+.list-books-logo {
+  vertical-align: bottom;
+  margin-right: 0.4em;
 }
 
 .list-books-title h1 {
@@ -59,7 +65,7 @@ body, .app {
   height: 50px;
   border-radius: 50%;
   background: #2e7d32;
-  background-image: url('./icons/add.svg');
+  background-image: url('./icons/search.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
