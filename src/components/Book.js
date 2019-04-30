@@ -18,7 +18,7 @@ function Book(props) {
       <h3 className="book-title">{props.book.title}</h3>
       <div className="book-authors">
         {
-          props.book.authors.join(', ') // TODO: Review making this and unordered list
+          (props.book.authors || []).join(', ')
         }
       </div>
     </div>

@@ -64,7 +64,10 @@ class BooksApp extends React.Component {
 
         <main>
           {this.state.showSearchPage && (
-            <SearchPage showSearchPage={this.showSearchPage} />
+            <SearchPage
+              showSearchPage={this.showSearchPage}
+              moveBook={this.moveBook}
+            />
           )}
 
           {!this.state.showSearchPage && this.state.loading && (

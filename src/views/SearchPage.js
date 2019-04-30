@@ -1,36 +1,67 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import * as BooksAPI from '../BooksAPI';
+import Book from "../components/Book";
 
-function SearchPage(props) {
+class SearchPage extends Component {
+  static propTypes = {
+    showSearchPage: PropTypes.func.isRequired,
+    moveBook: PropTypes.func.isRequired // TODO: Review the function to pass in
+  };
+
+  state = {
+    results: []
+  };
+
+  handleSearch = async (event) => {
+
+    const query = event.target.value;
+
+    let results = [];
+
+    if (query) {
+      const serverData = await BooksAPI.search(query);
+
+      // Error property with slightly strange message returned when there are no results
+      if (serverData.error !== 'empty query') {
+        results = serverData; // If there are results the serverData holds the array
+      }
+    }
+
+    this.setState({
+      results: results
+    })
+  };
 
   // TODO: Look at how to set the input as having focus
 
-  return (
-    <div className="search-books">
-      <div className="search-books-bar">
-        <button className="close-search" onClick={() => props.showSearchPage(false)}>Close</button>
-        <div className="search-books-input-wrapper">
-          {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
+  render() {
+    return (
+      <div className="search-books">
+        <div className="search-books-bar">
+          <button className="close-search" onClick={() => this.props.showSearchPage(false)}>Close</button>
+          <div className="search-books-input-wrapper">
 
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
-          <input type="text" placeholder="Search by title or author" aria-label="Search by title or author" />
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              aria-label="Search by title or author"
+              onChange={this.handleSearch} />
 
+          </div>
+        </div>
+        <div className="search-books-results">
+          <ol className="books-grid">
+            {this.state.results.map(book =>(
+              <li key={book.id}>
+                <Book book={book} moveBook={this.props.moveBook} />
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
-      <div className="search-books-results">
-        <ol className="books-grid" />
-      </div>
-    </div>
-  )
+    )
+  }
 }
-
-SearchPage.propTypes = {
-  showSearchPage: PropTypes.func.isRequired
-};
 
 export default SearchPage;
