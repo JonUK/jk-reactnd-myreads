@@ -6,6 +6,7 @@ To run the site, perform the following steps:
 
 * Install all project dependencies with `npm install`
 * Start the development server with `npm start`
+* Access the site locally on [http://localhost:3000](http://localhost:3000)
 
 ## Backend Server
 
