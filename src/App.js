@@ -9,11 +9,6 @@ class BooksApp extends React.Component {
   state = {
     loading: true,
     books: [],
-    bookshelves: [
-      { value: 'currentlyReading', name: 'Currently Reading' },
-      { value: 'wantToRead', name: 'Want To Read' },
-      { value: 'read', name: 'Read' },
-    ],
     /**
      * TODO: Instead of using this state variable to keep track of which page
      * we're on, use the URL in the browser's address bar. This will ensure that
@@ -85,6 +80,7 @@ class BooksApp extends React.Component {
         <Header />
 
         <main>
+
           {this.state.showSearchPage && (
             <SearchPage
               showSearchPage={this.showSearchPage}
@@ -93,14 +89,10 @@ class BooksApp extends React.Component {
             />
           )}
 
-          {!this.state.showSearchPage && this.state.loading && (
-            <div className="loader" aria-label="Loading" />
-          )}
-
-          {!this.state.showSearchPage && !this.state.loading && (
+          {!this.state.showSearchPage && (
             <ListBooksPage
+              loading={this.state.loading}
               books={this.state.books}
-              bookshelves={this.state.bookshelves}
               moveBook={this.moveBook}
               showSearchPage={this.showSearchPage}
             />
