@@ -10,18 +10,20 @@ class SearchPage extends Component {
   };
 
   state = {
+    query: '',
     results: []
   };
 
   handleSearch = async (event) => {
+
+    this.setState({ query: event.target.value });
+
     const results = await this.props.search(event.target.value);
 
-    this.setState({
-      results: results
-    })
+    this.setState({ results: results });
   };
 
-  // TODO: Look at how to set the input as having focus
+  // TODO: Look at how to set the input as having focus when this component displayed
 
   render() {
     return (
@@ -34,6 +36,7 @@ class SearchPage extends Component {
               type="text"
               placeholder="Search by title or author"
               aria-label="Search by title or author"
+              value={this.state.query}
               onChange={this.handleSearch} />
 
           </div>
