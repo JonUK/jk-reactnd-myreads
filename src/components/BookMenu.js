@@ -8,16 +8,17 @@ class BookMenu extends Component {
   };
 
   handleChangeShelf = (event) => {
-    this.props.moveBook(this.props.book.id, event.target.value);
+    this.props.moveBook(this.props.book, event.target.value);
     event.preventDefault();
   };
 
   render() {
     const { book } = this.props;
+    const shelf = book.shelf || 'none';
 
     return (
       <div className="book-shelf-changer">
-        <select value={book.shelf} onChange={this.handleChangeShelf}>
+        <select value={shelf} onChange={this.handleChangeShelf}>
           <option value="move" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>

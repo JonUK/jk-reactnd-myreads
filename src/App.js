@@ -23,22 +23,28 @@ class BooksApp extends React.Component {
     showSearchPage: false
   };
 
-  moveBook = async (bookId, shelf) => {
-    const originalBook = this.state.books.find(book => book.id === bookId);
+  /**
+   * Either move an existing book from one shelf to another or add a new book into a shelf
+   * @param bookToUpdate
+   * @param shelf
+   * @returns {Promise<void>}
+   */
+  moveBook = async (bookToUpdate, shelf) => {
 
-    // Take a deep copy of the book so we don't mutate the original
-    let newBook = JSON.parse(JSON.stringify(originalBook));
-    newBook.shelf = shelf;
+    // Take a deep copy of the book to update so we don't mutate the original
+    let copyOfBookToUpdate = JSON.parse(JSON.stringify(bookToUpdate));
+    copyOfBookToUpdate.shelf = shelf;
 
-    const updatedBooks = this.state.books.map(book => {
-      return book === originalBook ? newBook : book;
-    });
+    const updatedBooks = this.state.books
+      .filter(book => book.id !== copyOfBookToUpdate.id)
+      .concat(copyOfBookToUpdate);
 
+    // Update the UI first and then asynchronously push this change to the server
     this.setState({
       books: updatedBooks
     });
 
-    await BooksAPI.update(newBook, shelf);
+    await BooksAPI.update(copyOfBookToUpdate, shelf);
   };
 
   showSearchPage = (visible) => {
@@ -49,6 +55,8 @@ class BooksApp extends React.Component {
 
   async componentDidMount() {
     const books = await BooksAPI.getAll();
+
+    console.log(books);
 
     this.setState({
       loading: false,

@@ -6,7 +6,7 @@ import Book from "../components/Book";
 class SearchPage extends Component {
   static propTypes = {
     showSearchPage: PropTypes.func.isRequired,
-    moveBook: PropTypes.func.isRequired // TODO: Review the function to pass in
+    moveBook: PropTypes.func.isRequired
   };
 
   state = {
