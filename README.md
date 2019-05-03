@@ -1,6 +1,7 @@
 
 # MyReads Project
 JonUK's solution for the MyReads project.
+The MyReads website allows you to manage your book collection.
 
 To run the site, perform the following steps:
 
