@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as BooksAPI from '../BooksAPI';
 import Book from "../components/Book";
 
 class SearchPage extends Component {
   static propTypes = {
     showSearchPage: PropTypes.func.isRequired,
+    search: PropTypes.func.isRequired,
     moveBook: PropTypes.func.isRequired
   };
 
@@ -14,19 +14,7 @@ class SearchPage extends Component {
   };
 
   handleSearch = async (event) => {
-
-    const query = event.target.value;
-
-    let results = [];
-
-    if (query) {
-      const serverData = await BooksAPI.search(query);
-
-      // Error property with slightly strange message returned when there are no results
-      if (serverData.error !== 'empty query') {
-        results = serverData; // If there are results the serverData holds the array
-      }
-    }
+    const results = await this.props.search(event.target.value);
 
     this.setState({
       results: results

@@ -25,9 +25,6 @@ class BooksApp extends React.Component {
 
   /**
    * Either move an existing book from one shelf to another or add a new book into a shelf
-   * @param bookToUpdate
-   * @param shelf
-   * @returns {Promise<void>}
    */
   moveBook = async (bookToUpdate, shelf) => {
 
@@ -47,6 +44,25 @@ class BooksApp extends React.Component {
     await BooksAPI.update(copyOfBookToUpdate, shelf);
   };
 
+  search = async (query) => {
+    let results = [];
+
+    if (query) {
+      const serverData = await BooksAPI.search(query);
+      const resultsReturned = serverData.error !== 'empty query'; // This message is returned when there are no results
+
+      if (resultsReturned) {
+        // For each server response book, see if the book is in state and if so then use
+        results = serverData.map(serverBook => {
+          const stateBook = this.state.books.find(x => x.id === serverBook.id);
+          return stateBook || serverBook;
+        });
+      }
+    }
+
+    return results;
+  };
+
   showSearchPage = (visible) => {
     this.setState({
       showSearchPage: visible
@@ -55,8 +71,6 @@ class BooksApp extends React.Component {
 
   async componentDidMount() {
     const books = await BooksAPI.getAll();
-
-    console.log(books);
 
     this.setState({
       loading: false,
@@ -74,6 +88,7 @@ class BooksApp extends React.Component {
           {this.state.showSearchPage && (
             <SearchPage
               showSearchPage={this.showSearchPage}
+              search={this.search}
               moveBook={this.moveBook}
             />
           )}
