@@ -9,6 +9,9 @@ To run the site, perform the following steps:
 * Start the development server with `npm start`
 * Access the site locally on [http://localhost:3000](http://localhost:3000)
 
+![Screenshot of MyReads Website](https://raw.githubusercontent.com/JonUK/jk-reactnd-myreads/master/designs/myreads-screenshot.png)
+
+
 ## Backend Server
 
 To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
