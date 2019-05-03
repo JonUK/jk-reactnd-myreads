@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Book from "../components/Book";
 
 class SearchPage extends Component {
   static propTypes = {
-    showSearchPage: PropTypes.func.isRequired,
     search: PropTypes.func.isRequired,
     moveBook: PropTypes.func.isRequired
   };
@@ -23,16 +23,15 @@ class SearchPage extends Component {
     this.setState({ results: results });
   };
 
-  // TODO: Look at how to set the input as having focus when this component displayed
-
   render() {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <button className="close-search" onClick={() => this.props.showSearchPage(false)}>Close</button>
+          <Link to="/" className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
 
             <input
+              autoFocus
               type="text"
               placeholder="Search by title or author"
               aria-label="Search by title or author"

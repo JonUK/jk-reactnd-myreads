@@ -1,8 +1,7 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Bookshelf from "../components/Bookshelf";
-
-// TODO: Review if this component should hold state on the books and shelves or not
 
 function ListBooksPage(props) {
 
@@ -35,7 +34,7 @@ function ListBooksPage(props) {
             })}
           </div>
           <div className="open-search">
-            <button onClick={() => props.showSearchPage(true)}>Search for book to add</button>
+            <NavLink to="/search">Search for book to add</NavLink>
           </div>
         </div>
       )}
@@ -47,8 +46,7 @@ function ListBooksPage(props) {
 ListBooksPage.propTypes = {
   loading: PropTypes.bool.isRequired,
   books: PropTypes.array.isRequired,
-  moveBook: PropTypes.func.isRequired,
-  showSearchPage: PropTypes.func.isRequired
+  moveBook: PropTypes.func.isRequired
 };
 
 export default ListBooksPage;

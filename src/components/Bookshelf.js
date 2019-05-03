@@ -4,7 +4,7 @@ import Book from './Book';
 
 function Bookshelf(props) {
 
-  // TODO: Add a paragraph of text when the shelf has no books
+  // TODO: Review adding a paragraph of text when the shelf has no books
 
   return (
     <section className="bookshelf">
